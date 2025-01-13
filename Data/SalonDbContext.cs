@@ -14,6 +14,8 @@ namespace GlamourZone.Data
         public DbSet<CategoryViewModel> Categories { get; set; }
         public DbSet<ServiceViewModel> Services { get; set; }
 
+        public DbSet<AppointmentViewModel> Appointments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
