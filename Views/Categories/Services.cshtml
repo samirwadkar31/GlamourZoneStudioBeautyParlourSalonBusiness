@@ -1,0 +1,26 @@
+﻿@model IEnumerable<GlamourZone.Models.ServiceViewModel>
+
+@{
+    ViewData["Title"] = "Services";
+    var categoryName = ViewData["CategoryName"] as string;
+}
+
+<h1 class="text-center mb-4">@categoryName Services</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var service in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card service-card">
+                    <img src="@service.PhotosPath" class="card-img-top" alt="@service.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@service.Name</h5>
+                        <p class="card-text">@service.Description</p>
+                        <p class="card-text"><strong>Price:</strong> Rs. @service.Price</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

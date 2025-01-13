@@ -21,5 +21,22 @@ namespace GlamourZone.Controllers
             return View(categories);
             
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Services(int categoryId)
+        {
+            // Fetch the category along with its services
+            var category = await _context.Categories
+                .Include(c => c.Services) // Ensure services are included
+                .FirstOrDefaultAsync(c => c.Id == categoryId);
+
+            if (category == null)
+            {
+                return NotFound(); // Return 404 if the category doesn't exist
+            }
+
+            ViewData["CategoryName"] = category.Name; // Pass category name for display
+            return View(category.Services); // Pass the services to the view
+        }
     }
 }

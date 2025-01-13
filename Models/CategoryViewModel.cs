@@ -10,6 +10,8 @@ namespace GlamourZone.Models
         public string Description { get; set; }
         public string PhotosPath { get; set; }
 
+        public ICollection<ServiceViewModel> Services { get; set; }
+
 
     }
 
