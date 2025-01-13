@@ -1,0 +1,20 @@
+﻿@model IEnumerable<GlamourZone.Models.CategoryViewModel>
+
+<h1 class="text-center mb-4">Our Services</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var catgeory in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card category-card">
+                    <img src="@catgeory.PhotosPath" class="card-img-top" alt="@catgeory.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@catgeory.Name</h5>
+                        <p class="card-text">@catgeory.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
