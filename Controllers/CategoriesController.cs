@@ -25,6 +25,7 @@ namespace GlamourZone.Controllers
         [HttpGet]
         public async Task<IActionResult> Services(int categoryId)
         {
+            ViewData["BodyClass"] = "services-page";
             // Fetch the category along with its services
             var category = await _context.Categories
                 .Include(c => c.Services) // Ensure services are included

@@ -1,0 +1,128 @@
+﻿/* General Body Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+/* Heading Styles */
+h1 {
+    color: #343a40;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Card Styles */
+.service-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 20px;
+    position: relative;
+    height: 420px; /* Reduced height */
+    display: flex;
+    flex-direction: column;
+}
+
+    .service-card .card-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+/* Card Image Styles */
+.card-img-top {
+    height: 180px; /* Slightly reduced height */
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Card Title and Text Styles */
+.card-title {
+    font-size: 1.2rem;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 5px; /* Reduced bottom margin */
+    height: 3rem;
+    overflow: hidden;
+}
+
+.card-text {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 5px; /* Reduced bottom margin */
+    flex-grow: 1;
+    height: 4rem; /* Reduced height for the description */
+    overflow: hidden;
+}
+
+.card-price {
+    font-weight: bold;
+    margin-top: 5px; /* Add some margin-top to separate from the description */
+    margin-bottom: 5px; /* Add margin-bottom for spacing between price and button */
+}
+
+/* Button Styles */
+.btn {
+    background-color: #000;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 8px 16px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+}
+
+    .btn:hover {
+        background-color: #333;
+        color: #f8f9fa;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+/* Adjusted Grid Layout for Service Cards */
+.col-md-4 {
+    max-width: 33.33%;
+    flex: 1 1 33.33%;
+    margin-bottom: 20px;
+}
+
+/* Tablet Adjustments */
+@media (max-width: 768px) {
+    .col-md-4 {
+        max-width: 48%;
+        flex: 1 1 48%;
+    }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 576px) {
+    .col-md-4 {
+        max-width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .btn {
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
+}

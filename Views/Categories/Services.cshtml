@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<GlamourZone.Models.ServiceViewModel>
 
 @{
+    ViewData["BodyClass"] = "services-page";
+}
+
+@{
     ViewData["Title"] = "Services";
     var categoryName = ViewData["CategoryName"] as string;
 }
@@ -17,7 +21,8 @@
                     <div class="card-body">
                         <h5 class="card-title">@service.Name</h5>
                         <p class="card-text">@service.Description</p>
-                        <p class="card-text"><strong>Price:</strong> Rs. @service.Price</p>
+                        <p class="card-text"><strong>Price:</strong> <span>Rs. @service.Price</span></p>
+                        <a href="/Appointments/Create" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
             </div>
