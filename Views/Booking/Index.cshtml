@@ -1,0 +1,168 @@
+﻿@model GlamourZone.ViewModels.BookingViewModel
+
+<!-- Full Width Black Background Div with Heading -->
+<div class="text-center p-3 mb-4" style="background-color: black; color: white; width: 100%;">
+    <h2 style="margin: 0; font-weight: bold; font-size: 24px;">📅 Book Your Appointment</h2>
+    <p style="margin: 0; font-size: 1.1rem; opacity: 0.8;">Choose your preferred date, time, and service</p>
+</div>
+
+<!-- Form Container with White Space on Sides -->
+<div class="container" style="max-width: 600px; margin: auto; background-color: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <form asp-action="Create" method="post" style="padding: 20px;">
+        <div class="form-group mb-2">
+            <label for="ClientName" style="font-weight: bold;">Client Name</label>
+            <input type="text" id="ClientName" name="ClientName" class="form-control" required />
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="MobileNumber" style="font-weight: bold;">Mobile Number</label>
+            <input type="text" id="MobileNumber" name="MobileNumber" class="form-control" required />
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="BookingDate" style="font-weight: bold;">Select Date & Time</label>
+            <input type="datetime-local" id="BookingDate" name="BookingDate" class="form-control" required />
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="CategoryId" style="font-weight: bold;">Select Category</label>
+            <select id="CategoryId" name="CategoryId" class="form-control">
+                <option value="">-- Select Category --</option>
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="SelectedServiceIds" style="font-weight: bold;">Select Service</label>
+            <div id="services-list" class="mb-3">
+                @foreach (var service in Model.Services)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="Service_@service.Id" name="SelectedServiceIds" value="@service.Id" @(Model.SelectedServiceIds.Contains(service.Id) ? "checked" : "")>
+                        <label class="form-check-label" for="Service_@service.Id">@service.Name</label>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-dark btn-lg w-100" style="font-weight: bold; background-color: black; border: none; color: white;">
+            Book Appointment
+        </button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Set the selected category on page load
+        $('#CategoryId').val('@Model.SelectedCategoryId');
+
+        // Preserve the selected services
+        var selectedServices = {};
+
+        function updateSelectedServices() {
+            $('input[name="SelectedServiceIds"]:checked').each(function () {
+                selectedServices[$(this).val()] = $(this).next('label').text();
+            });
+        }
+
+        function refreshServicesList(services) {
+            var servicesList = $('#services-list');
+            servicesList.empty();
+            $.each(selectedServices, function (id, name) {
+                servicesList.append(`
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="Service_${id}" name="SelectedServiceIds" value="${id}" checked>
+                        <label class="form-check-label" for="Service_${id}">${name}</label>
+                    </div>
+                `);
+            });
+            $.each(services, function (index, service) {
+                if (!selectedServices[service.id]) {
+                    servicesList.append(`
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="Service_${service.id}" name="SelectedServiceIds" value="${service.id}">
+                            <label class="form-check-label" for="Service_${service.id}">${service.name}</label>
+                        </div>
+                    `);
+                }
+            });
+        }
+
+        $('#CategoryId').change(function () {
+            var categoryId = $(this).val();
+            if (categoryId) {
+                $.ajax({
+                    url: '@Url.Action("LoadServices", "Booking")',
+                    type: 'GET',
+                    data: { categoryId: categoryId },
+                    success: function (data) {
+                        updateSelectedServices();
+                        refreshServicesList(data);
+                    }
+                });
+            } else {
+                $('#services-list').empty();
+            }
+        });
+
+        $(document).on('change', 'input[name="SelectedServiceIds"]', function () {
+            if ($(this).is(':checked')) {
+                selectedServices[$(this).val()] = $(this).next('label').text();
+            } else {
+                delete selectedServices[$(this).val()];
+            }
+        });
+
+        updateSelectedServices();
+    });
+</script>
+
+<style>
+    .container {
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .btn-lg {
+        font-weight: bold;
+    }
+
+    .form-check-label {
+        margin-left: 0.5rem;
+    }
+
+    /* Aesthetic Enhancements */
+    label {
+        color: black;
+    }
+
+    .form-control {
+        border-radius: 0;
+        border-color: #ced4da;
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+
+        .form-control:focus {
+            border-color: black;
+            box-shadow: none;
+        }
+
+    .form-check-input {
+        width: 20px;
+        height: 20px;
+    }
+
+        .form-check-input:checked {
+            background-color: black;
+            border-color: black;
+        }
+</style>

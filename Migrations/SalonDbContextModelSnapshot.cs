@@ -22,38 +22,43 @@ namespace GlamourZone.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GlamourZone.Models.AppointmentViewModel", b =>
+            modelBuilder.Entity("GlamourZone.Models.Appointment", b =>
                 {
-                    b.Property<int>("AppointmentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("AppointmentDate")
+                    b.Property<DateTime>("AppointmentTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<TimeSpan>("AppointmentTime")
-                        .HasColumnType("time");
 
                     b.Property<string>("ClientName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClientPhone")
+                    b.Property<string>("MobileNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsBooked")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Services")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AppointmentId");
+                    b.HasKey("Id");
 
                     b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("GlamourZone.Models.AppointmentService", b =>
+                {
+                    b.Property<int>("AppointmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AppointmentId", "ServiceId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("AppointmentServices");
                 });
 
             modelBuilder.Entity("GlamourZone.Models.CategoryViewModel", b =>
@@ -114,6 +119,25 @@ namespace GlamourZone.Migrations
                     b.ToTable("Services");
                 });
 
+            modelBuilder.Entity("GlamourZone.Models.AppointmentService", b =>
+                {
+                    b.HasOne("GlamourZone.Models.Appointment", "Appointment")
+                        .WithMany("AppointmentServices")
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GlamourZone.Models.ServiceViewModel", "Service")
+                        .WithMany("AppointmentServices")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("Service");
+                });
+
             modelBuilder.Entity("GlamourZone.Models.ServiceViewModel", b =>
                 {
                     b.HasOne("GlamourZone.Models.CategoryViewModel", "Categories")
@@ -125,9 +149,19 @@ namespace GlamourZone.Migrations
                     b.Navigation("Categories");
                 });
 
+            modelBuilder.Entity("GlamourZone.Models.Appointment", b =>
+                {
+                    b.Navigation("AppointmentServices");
+                });
+
             modelBuilder.Entity("GlamourZone.Models.CategoryViewModel", b =>
                 {
                     b.Navigation("Services");
+                });
+
+            modelBuilder.Entity("GlamourZone.Models.ServiceViewModel", b =>
+                {
+                    b.Navigation("AppointmentServices");
                 });
 #pragma warning restore 612, 618
         }
