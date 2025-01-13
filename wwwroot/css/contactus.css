@@ -1,0 +1,244 @@
+﻿/* Main container for the whole page */
+.contact-page-container {
+    background-color: #f8f9fa; /* Light background color */
+    color: #212529; /* Darker text for better contrast */
+    font-family: 'Arial', sans-serif; /* Matching font */
+    padding: 40px 0;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #212529, #343a40); /* Darker gradient */
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+}
+
+    .hero-section h1 {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .hero-section p {
+        font-size: 16px;
+    }
+
+/* Contact Information Section */
+.contact-info-section {
+    text-align: center;
+    margin-top: 40px;
+}
+
+    .contact-info-section h2 {
+        font-size: 32px;
+        color: #212529; /* Darker text for consistency */
+        margin-bottom: 20px;
+    }
+
+    .contact-info-section .info-header p {
+        font-size: 16px;
+        color: #666;
+    }
+
+/* Contact Info */
+.contact-info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    width: 270px;
+    background: #f7f7f7;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+    .contact-item i {
+        font-size: 28px;
+        color: #212529; /* Darker icon color */
+        margin-right: 20px;
+    }
+
+    .contact-item h3 {
+        font-size: 18px;
+        color: #212529; /* Darker heading color */
+        margin-bottom: 5px;
+    }
+
+    .contact-item p {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+/* Email Address - Fix Overflow Issue */
+.email-address {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 100%;
+    max-width: 240px;
+}
+
+/* Map Section */
+.map-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+}
+
+    .map-section iframe {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+/* Contact Form Section */
+.contact-form-section {
+    margin-top: 60px;
+    text-align: center;
+}
+
+    .contact-form-section h2 {
+        font-size: 28px;
+        color: #212529; /* Darker heading color */
+        margin-bottom: 30px;
+    }
+
+/* Contact Form */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #f7f7f7;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+    .contact-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .contact-form label {
+        font-size: 16px;
+        color: #212529; /* Darker text color */
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .contact-form .form-control {
+        width: 100%;
+        padding: 15px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+    }
+
+        .contact-form .form-control:focus {
+            border-color: #212529; /* Darker focus border */
+            outline: none;
+        }
+
+    .contact-form .submit-btn {
+        background-color: #212529; /* Dark button */
+        color: white;
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .contact-form .submit-btn:hover {
+            background-color: #343a40; /* Darker shade for hover */
+        }
+
+/* Responsive Design for Mobile Devices */
+@media (max-width: 768px) {
+    .contact-info {
+        flex-direction: column;
+        align-items: flex-start; /* Align items to the left on mobile */
+        gap: 20px;
+    }
+
+    .contact-item {
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: left; /* Keep text aligned left */
+    }
+
+        .contact-item i {
+            font-size: 32px; /* Increase icon size */
+            margin-bottom: 10px;
+        }
+
+        .contact-item h3 {
+            font-size: 20px; /* Adjust heading size */
+            margin-bottom: 5px;
+        }
+
+        .contact-item p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+    .contact-form {
+        width: 90%;
+        padding: 20px;
+    }
+
+        .contact-form input,
+        .contact-form textarea {
+            font-size: 14px;
+        }
+
+        .contact-form button {
+            font-size: 16px;
+            padding: 12px 25px;
+        }
+
+    .map-section iframe {
+        height: 250px; /* Reduce map height on smaller screens */
+    }
+
+    /* Adjust Hero Section */
+    .hero-section h1 {
+        font-size: 28px; /* Smaller size for smaller screens */
+    }
+
+    .hero-section p {
+        font-size: 14px;
+    }
+
+    .contact-form-section h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-item {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .contact-form button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 12px;
+    }
+}
