@@ -16,6 +16,7 @@ namespace GlamourZone.Controllers
         
         public async Task<IActionResult> Index()
         {
+            ViewData["BodyClass"] = "categories-page";
             var categories = await _context.Categories.ToListAsync();
             return View(categories);
             

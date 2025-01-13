@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/GlamourZone.styles.css" asp-append-version="true" />
+    @if (ViewData["BodyClass"] == "categories-page")
+    {
+        <link rel="stylesheet" href="~/css/categories.css">
+    }
 </head>
 <body>
     <header>

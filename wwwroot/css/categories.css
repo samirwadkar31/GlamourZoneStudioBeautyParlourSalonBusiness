@@ -1,0 +1,115 @@
+﻿/* General Body Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+/* Heading Styles */
+h1 {
+    color: #343a40;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Card Styles */
+.category-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 20px;
+    position: relative; /* Add relative positioning */
+}
+
+    .category-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+/* Card Image Styles */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Card Title and Text Styles */
+.card-title {
+    font-size: 1.2rem;
+    color: #000; /* Black category names */
+    font-weight: bold;
+}
+
+.card-text {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+/* Button Styles */
+.btn {
+    background-color: #000; /* Black button */
+    color: #fff; /* White text */
+    font-size: 0.85rem; /* Slightly smaller font size */
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px; /* Smooth rounded corners */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 8px 16px; /* Add padding to the buttons */
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute; /* Position buttons absolutely */
+    bottom: 10px; /* Position buttons at the bottom */
+}
+
+    /* Hover and Active Effects */
+    .btn:hover {
+        background-color: #333;
+        color: #f8f9fa;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+.card-body {
+    padding-bottom: 50px; /* Add padding to avoid overlap */
+}
+
+    .card-body .btn:first-child {
+        left: 10px; /* Position first button to the left */
+    }
+
+    .card-body .btn:last-child {
+        right: 10px; /* Position second button to the right */
+    }
+
+/* Adjusted Grid Layout for Category Cards */
+.col-md-4 {
+    max-width: 33.33%; /* Slightly increased width to accommodate larger text */
+    flex: 1 1 33.33%;
+    margin-bottom: 20px;
+}
+
+/* Tablet Adjustments */
+@media (max-width: 768px) {
+    .col-md-4 {
+        max-width: 48%; /* 2 boxes per row on tablets */
+        flex: 1 1 48%;
+    }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 576px) {
+    .col-md-4 {
+        max-width: 100%; /* Full-width for mobile */
+        flex: 1 1 100%;
+    }
+}
