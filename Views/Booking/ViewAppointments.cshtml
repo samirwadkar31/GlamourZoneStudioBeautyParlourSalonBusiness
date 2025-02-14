@@ -1,0 +1,66 @@
+﻿@model IEnumerable<GlamourZone.Models.Appointment>
+
+@{
+    Layout = "_Layout";
+    var selectedDate = Context.Request.Query["date"].ToString();
+    var currentDate = string.IsNullOrEmpty(selectedDate) ? DateTime.Now.ToString("yyyy-MM-dd") : selectedDate;
+}
+
+<!-- Full Width Black Background Div with Heading -->
+<div class="text-center p-3 mb-4" style="background-color: black; color: white; width: 100%;">
+    <h2 style="margin: 0; font-weight: bold; font-size: 24px;">📅 All Appointments</h2>
+</div>
+
+<!-- Form Container with White Space on Sides -->
+<div class="container" style="max-width: 600px; margin: auto; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <form method="get" asp-action="ViewAppointments">
+        <div class="form-group">
+            <label for="AppointmentDate" style="font-weight: bold;">Select Date</label>
+            <input type="date" class="form-control" id="AppointmentDate" name="date" value="@currentDate" />
+        </div>
+    </form>
+</div>
+
+<table class="table mt-3">
+    <thead class="thead-dark">
+        <tr>
+            <th>Client Name</th>
+            <th>Mobile Number</th>
+            <th>Appointment Time</th>
+            <th>Services</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>@appointment.ClientName</td>
+                <td>@appointment.MobileNumber</td>
+                <td>@appointment.AppointmentTime.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    @if (appointment.AppointmentServices.Any())
+                    {
+                        @foreach (var appointmentService in appointment.AppointmentServices)
+                        {
+                            <span>@appointmentService.Service.Name</span>
+
+                            <br />
+                        }
+                    }
+                    else
+                    {
+                        <span class="text-danger">No services</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    document.getElementById("AppointmentDate").addEventListener("change", function () {
+        this.form.submit();
+    });
+</script>
+
+<link rel="stylesheet" href="~/css/viewAppointments.css" />
