@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<GlamourZone.Models.ServiceViewModel>
 
 @{
-    ViewData["BodyClass"] = "services-page";
-}
-
-@{
     ViewData["Title"] = "Services";
     var categoryName = ViewData["CategoryName"] as string;
 }
 
-<h1 class="text-center mb-4">@categoryName Services</h1>
+/* Notification Container */
+<div id="notification-container" class="notification-container"></div>
+
+<!-- Full Width Black Background Div with Heading -->
+<div class="text-center p-3 mb-4" style="background-color: black; color: white; width: 100%;">
+    <h2 style="margin: 0; font-weight: bold; font-size: 24px;">@categoryName Services</h2>
+</div>
 
 <div class="container">
     <div class="row">
@@ -21,11 +23,53 @@
                     <div class="card-body">
                         <h5 class="card-title">@service.Name</h5>
                         <p class="card-text">@service.Description</p>
-                        <p class="card-text"><strong>Price:</strong> <span>Rs. @service.Price</span></p>
-                        <a href="/Appointments/Create" class="btn btn-primary">Book Now</a>
+                        <small class="text-muted">Price: @service.Price</small>
+                        <div class="btn-container">
+                            <a href="/Booking/BookNow?serviceId=@service.Id" class="btn btn-primary">Book Now</a>
+                            <button class="btn btn-secondary" onclick="addToCart(@service.Id)">Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        function addToCart(serviceId) {
+            $.ajax({
+                url: '/Cart/Add',
+                type: 'POST',
+                data: { serviceId: serviceId },
+                success: function (response) {
+                    if (response.success) {
+                        showNotification('Service added to cart!');
+                    } else {
+                        showNotification('Error adding service to cart.');
+                    }
+                },
+                error: function () {
+                    showNotification('Error adding service to cart.');
+                }
+            });
+        }
+
+        function showNotification(message) {
+            const container = document.getElementById('notification-container');
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerText = message;
+            container.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('fade-out');
+                notification.addEventListener('transitionend', () => {
+                    notification.remove();
+                });
+            }, 1500); // Show for 1.5 seconds
+        }
+    </script>
+}
+
+<link rel="stylesheet" href="~/css/services.css" />
