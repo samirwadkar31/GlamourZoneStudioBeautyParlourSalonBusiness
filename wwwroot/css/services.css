@@ -1,128 +1,110 @@
-﻿/* General Body Styles */
-body {
-    background-color: #f8f9fa;
-    font-family: Arial, sans-serif;
+﻿/* Main container for the services page */
+.container {
+    background-color: #f8f9fa; /* Light background color */
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Matching font */
 }
 
-/* Heading Styles */
-h1 {
-    color: #343a40;
-    margin-bottom: 20px;
-    text-align: center;
+/* Notification Container */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
 }
 
-/* Card Styles */
+.notification {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+    .notification.fade-out {
+        opacity: 0;
+    }
+
+/* Service Card */
 .service-card {
+    background-color: white; /* White background for contrast */
     border: 1px solid #ddd;
     border-radius: 10px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    margin-bottom: 20px;
-    position: relative;
-    height: 420px; /* Reduced height */
+    padding: 15px; /* Reduced padding */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    height: 100%; /* Ensures uniform height */
 }
 
+    .service-card img {
+        border-radius: 10px;
+        height: 200px; /* Original image height */
+        object-fit: cover;
+    }
+
     .service-card .card-body {
-        flex-grow: 1;
+        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
 
-/* Card Image Styles */
-.card-img-top {
-    height: 180px; /* Slightly reduced height */
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-}
-
-/* Card Title and Text Styles */
-.card-title {
-    font-size: 1.2rem;
-    color: #000;
-    font-weight: bold;
-    margin-bottom: 5px; /* Reduced bottom margin */
-    height: 3rem;
-    overflow: hidden;
-}
-
-.card-text {
-    color: #666;
-    font-size: 1rem;
-    margin-bottom: 5px; /* Reduced bottom margin */
-    flex-grow: 1;
-    height: 4rem; /* Reduced height for the description */
-    overflow: hidden;
-}
-
-.card-price {
-    font-weight: bold;
-    margin-top: 5px; /* Add some margin-top to separate from the description */
-    margin-bottom: 5px; /* Add margin-bottom for spacing between price and button */
-}
-
-/* Button Styles */
-.btn {
-    background-color: #000;
-    color: #fff;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 8px 16px;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    width: calc(100% - 20px);
-}
-
-    .btn:hover {
-        background-color: #333;
-        color: #f8f9fa;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        transform: translateY(-2px);
+    .service-card .card-title {
+        font-size: 18px; /* Slightly smaller font size */
+        color: black; /* Consistent black text color */
+        margin-bottom: 5px; /* Reduced margin */
+        height: 40px; /* Reduced height for uniformity */
+        overflow: hidden; /* Truncate overflow text */
     }
 
-    .btn:active {
-        transform: translateY(1px);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    .service-card .card-text {
+        font-size: 14px;
+        color: #333;
+        height: 40px; /* Reduced height for uniformity */
+        overflow: hidden; /* Truncate overflow text */
     }
 
-/* Adjusted Grid Layout for Service Cards */
-.col-md-4 {
-    max-width: 33.33%;
-    flex: 1 1 33.33%;
-    margin-bottom: 20px;
-}
+    .service-card .text-muted {
+        font-size: 12px;
+        margin-bottom: 5px; /* Reduced margin */
+    }
 
-/* Tablet Adjustments */
+    /* Button Container */
+    .service-card .btn-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .service-card .btn {
+        display: inline-block;
+        padding: 8px 15px; /* Reduced padding */
+        margin-top: 10px;
+        background-color: black; /* Consistent black button */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+        .service-card .btn:hover {
+            background-color: #333; /* Darker shade for hover */
+        }
+
+    .service-card .btn-secondary {
+        background-color: #6c757d; /* Bootstrap secondary color */
+    }
+
+        .service-card .btn-secondary:hover {
+            background-color: #5a6268; /* Darker secondary color for hover */
+        }
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .col-md-4 {
-        max-width: 48%;
-        flex: 1 1 48%;
-    }
-}
-
-/* Mobile Adjustments */
-@media (max-width: 576px) {
-    .col-md-4 {
-        max-width: 100%;
-        flex: 1 1 100%;
-    }
-
-    .btn {
-        bottom: 15px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
+        width: 100%;
+        margin-bottom: 20px;
     }
 }

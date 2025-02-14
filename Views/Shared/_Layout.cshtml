@@ -6,7 +6,13 @@
     <title>@ViewData["Title"] - GlamourZone</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/GlamourZone.styles.css" asp-append-version="true" />
+    <!-- Add this to the <head> section of your HTML -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="~/css/styles.css" />
+
+    <!-- Page-Specific Styles -->
     @if (ViewData["BodyClass"] == "categories-page")
     {
         <link rel="stylesheet" href="~/css/categories.css">
@@ -15,13 +21,29 @@
     {
         <link rel="stylesheet" href="~/css/contactus.css">
     }
-    else if (ViewData["BodyClass"] == "services-page")
+    else if (ViewData["BodyClass"] == "home-page")
     {
-        <link rel="stylesheet" href="~/css/services.css">
+        <link rel="stylesheet" href="~/css/home.css">
     }
-
+    else if (ViewData["BodyClass"] == "viewappointments-page")
+    {
+        <link rel="stylesheet" href="~/css/viewappointments.css">
+    }
+    @* else if (ViewData["BodyClass"] == "appointments-page") *@
+    @* { *@
+    @*     <link rel="stylesheet" href="~/css/appointments.css"> *@
+    @* } *@
+    @* else if (ViewData["BodyClass"] == "offers-page") *@
+    @* { *@
+    @*     <link rel="stylesheet" href="~/css/offers.css"> *@
+    @* } *@
+    @* else if (ViewData["BodyClass"] == "reviews-page") *@
+    @* { *@
+    @*     <link rel="stylesheet" href="~/css/reviews.css"> *@
+    @* } *@
 </head>
-<body>
+
+<body class="@ViewData["BodyClass"]">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -36,16 +58,19 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Catgegories</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index">Book Appointment</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">Book Appointment</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="ViewAppointments">View Appointments</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ContactUs" asp-action="ContactUs">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
                         </li>
                     </ul>
                 </div>
@@ -58,14 +83,16 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - GlamourZone - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Glamour Zone. All rights reserved.</p>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
