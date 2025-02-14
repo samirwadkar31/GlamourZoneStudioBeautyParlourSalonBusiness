@@ -1,8 +1,42 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["BodyClass"] = "home-page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    Layout = "_Layout";
+}
+
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Welcome to Glamour Zone</h1>
+        <p>Experience the best in beauty and wellness</p>
+        <a href="/Booking" class="btn">Book Your Appointment Today</a>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="text">
+        <h2>About Us</h2>
+        <p>At Glamour Zone, we provide top-notch beauty and wellness services to make you look and feel your best. Our experienced staff and luxurious atmosphere offer a perfect retreat for relaxation and rejuvenation.</p>
+        <a href="/Categories" class="btn">Explore Our Services</a>
+    </div>
+</section>
+
+<section class="reviews-section">
+    <h2>What Our Clients Say</h2>
+    <div class="reviews">
+        <div class="review">
+            <p>"Amazing experience! The staff is very professional and friendly."</p>
+            <small>⭐⭐⭐⭐⭐</small>
+        </div>
+        <div class="review">
+            <p>"The best salon in town. Highly recommend Glamour Zone."</p>
+            <small>⭐⭐⭐⭐⭐</small>
+        </div>
+        <div class="review">
+            <p>"Love the ambiance and the services. Will come back for sure!"</p>
+            <small>⭐⭐⭐⭐⭐</small>
+        </div>
+    </div>
+</section>
