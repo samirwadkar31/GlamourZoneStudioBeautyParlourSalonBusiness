@@ -6,12 +6,11 @@ namespace GlamourZone.Models
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }  // e.g., Full Body Massage, Simple Makeup, etc.
+        public string Name { get; set; }
         public string Description { get; set; }
         public string PhotosPath { get; set; }
 
         public ICollection<ServiceViewModel> Services { get; set; }
-
 
     }
 

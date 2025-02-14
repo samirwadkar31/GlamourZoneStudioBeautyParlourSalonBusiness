@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿// Data/SalonDbContext.cs
 using GlamourZone.Models;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
-using System.Collections.Generic;
-using System.Reflection.Emit;
-using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace GlamourZone.Data
 {
@@ -11,21 +8,33 @@ namespace GlamourZone.Data
     {
         public SalonDbContext(DbContextOptions<SalonDbContext> options) : base(options) { }
 
-        public DbSet<CategoryViewModel> Categories { get; set; }
         public DbSet<ServiceViewModel> Services { get; set; }
-
-        public DbSet<AppointmentViewModel> Appointments { get; set; }
+        public DbSet<CategoryViewModel> Categories { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<AppointmentService> AppointmentServices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ServiceViewModel>()
-                .HasOne(s => s.Categories)          // Singular navigation property (Category)
-                .WithMany(c => c.Services)        // Navigation property in CategoryViewModel
-                .HasForeignKey(s => s.CategoryId) // Foreign Key in ServiceViewModel
-                .OnDelete(DeleteBehavior.Cascade); // Optional, adjust based on your requirements
-        }
+            modelBuilder.Entity<AppointmentService>()
+                .HasKey(aps => new { aps.AppointmentId, aps.ServiceId });
 
+            modelBuilder.Entity<AppointmentService>()
+                .HasOne(aps => aps.Appointment)
+                .WithMany(a => a.AppointmentServices)
+                .HasForeignKey(aps => aps.AppointmentId);
+
+            modelBuilder.Entity<AppointmentService>()
+                .HasOne(aps => aps.Service)
+                .WithMany(s => s.AppointmentServices)
+                .HasForeignKey(aps => aps.ServiceId);
+
+            modelBuilder.Entity<ServiceViewModel>()
+                .HasOne(s => s.Categories)
+                .WithMany(c => c.Services)
+                .HasForeignKey(s => s.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }
